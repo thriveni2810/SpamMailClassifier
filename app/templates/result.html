@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Classification Result</h2>
+
+        {% if result == "SPAM EMAIL" %}
+
+        <img src="/static/spam.png" class="icon">
+
+        <h1 class="spam">{{ result }}</h1>
+
+        <p>
+            <b>This email is likely to be spam.</b>
+        </p>
+        <div class="score-box">
+            <h2>Confidence Score</h2>
+            <h1 class="score-red">{{ score }}%</h1>
+        </div>
+
+        {% else %}
+
+        <img src="/static/safe.png" class="icon">
+
+        <h1 class="safe">{{ result }}</h1>
+
+        <p>
+            <b>This email appears legitimate.</b>
+        </p>
+
+        <div class="score-box">
+            <h2>Confidence Score</h2>
+            <h1 class="score-green">{{ score }}%</h1>
+        </div>
+
+        {% endif %}
+
+        <div class="label">
+            Spam Probability {{ spam_prob }}%
+        </div>
+
+        <div class="progress">
+            <div class="spam-bar" data-width="{{ spam_prob }}">
+            </div>
+        </div>
+
+        <div class="label">
+            Ham Probability {{ ham_prob }}%
+        </div>
+
+        <div class="progress">
+            <div class="safe-bar" data-width="{{ ham_prob }}">
+            </div>
+        </div>
+
+        <a href="/">
+            <button>
+                Try Another Message
+            </button>
+        </a>
+
+    </div>
+
+    <script>
+
+        document.querySelector(".spam-bar").style.width =
+            document.querySelector(".spam-bar").dataset.width + "%";
+
+        document.querySelector(".safe-bar").style.width =
+            document.querySelector(".safe-bar").dataset.width + "%";
+
+    </script>
+
+</body>
+
+</html>
